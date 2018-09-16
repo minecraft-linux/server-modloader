@@ -11,13 +11,13 @@
 extern "C" {
 #endif
 
-enum modloader_log_level {
+typedef enum {
     MODLOADER_LOG_TRACE,
     MODLOADER_LOG_DEBUG,
     MODLOADER_LOG_INFO,
     MODLOADER_LOG_WARN,
     MODLOADER_LOG_ERROR
-};
+} modloader_log_level;
 
 void modloader_log(modloader_log_level level, const char *tag, const char *format, ...);
 void modloader_vlog(modloader_log_level level, const char *tag, const char *format, va_list args);
