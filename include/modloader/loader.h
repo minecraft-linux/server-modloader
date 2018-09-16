@@ -5,6 +5,8 @@
 extern "C" {
 #endif
 
+const char *modloader_version();
+
 typedef void (*modloader_foreach_fn)(void *handle, void *userdata);
 
 void modloader_add_lib_search_path(const char* path);
@@ -31,6 +33,8 @@ namespace modloader {
 class ModLoader {
 
 public:
+    static const char *getVersion();
+
     static void addLibSearchDir(std::string const& path);
 
     static void *loadMod(std::string const& path);

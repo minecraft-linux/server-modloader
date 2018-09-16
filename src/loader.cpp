@@ -14,6 +14,10 @@ static ModLoaderImpl loaderImpl;
 
 extern "C" {
 
+const char *modloader_version() {
+    return ModLoader::getVersion();
+}
+
 void modloader_add_lib_search_path(const char* path) {
     loaderImpl.addLibSearchDir(path);
 }
@@ -31,6 +35,10 @@ void modloader_iterate_mods(modloader_foreach_fn cb, void* userdata) {
         cb(v, userdata);
 }
 
+}
+
+const char *ModLoader::getVersion() {
+    return MODLOADER_VERSION;
 }
 
 void ModLoader::addLibSearchDir(std::string const &path) {
