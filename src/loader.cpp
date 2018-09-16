@@ -106,8 +106,6 @@ void ModLoaderImpl::loadModsFromDirectory(std::string const &path) {
             continue;
         std::string fileName(ent->d_name);
         size_t len = fileName.length();
-        if (len < 4 || memcmp(&fileName[len - 3], ".so", 3) != 0)
-            continue;
 
         loadMod(fileName);
     }
