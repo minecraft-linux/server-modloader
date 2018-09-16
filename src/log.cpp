@@ -2,6 +2,7 @@
 
 #include <cstdio>
 #include <ctime>
+#include <algorithm>
 
 using namespace modloader;
 
@@ -18,7 +19,11 @@ const char *modloader_log_level_str(modloader_log_level level) {
 
 void modloader_vlog(modloader_log_level level, const char *tag, const char *format, va_list args) {
     char buffer[4096];
-    vsnprintf(buffer, sizeof(buffer), format, args);
+    int len = vsnprintf(buffer, sizeof(buffer), format, args);
+    if (len > sizeof(buffer))
+        len = sizeof(buffer);
+    while (len > 0 && (buffer[len - 1] == '\r' || buffer[len - 1] == '\n'))
+        buffer[--len] = '\0';
 
     char tbuf[128];
     tbuf[0] = '\0';
