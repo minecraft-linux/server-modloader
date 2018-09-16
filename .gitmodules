@@ -1,0 +1,3 @@
+[submodule "dep/funchook"]
+	path = dep/funchook
+	url = ../funchook.git
