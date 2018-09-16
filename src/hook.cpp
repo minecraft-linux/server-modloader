@@ -16,7 +16,13 @@ modloader_hook_t *modloader_hook(void *sym, void *hook, void **orig) {
     *orig = sym;
     int r = funchook_prepare(h, orig, hook);
     if (r != 0) {
-        Log::error("Hook", "Error while hooking: %s", funchook_error_message(h));
+        Log::error("Hook", "Error while preparing hook: %s", funchook_error_message(h));
+        funchook_destroy(h);
+        return nullptr;
+    }
+    r = funchook_install(h, 0);
+    if (r != 0) {
+        Log::error("Hook", "Error while installing hook: %s", funchook_error_message(h));
         modloader_destroy_hook(h);
         return nullptr;
     }

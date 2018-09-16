@@ -22,10 +22,22 @@ void modloader_destroy_hook(modloader_hook_t*);
 
 namespace modloader {
 
-struct AutoHook {
+class AutoHook {
 
+private:
     modloader_hook_t* hook;
 
+    template <typename T>
+    static void *castToVoid(T hook) {
+        union {
+            T a;
+            void *b;
+        } hookUnion;
+        hookUnion.a = hook;
+        return hookUnion.b;
+    }
+
+public:
     AutoHook(void *sym, void *hook, void **orig) {
         this->hook = modloader_hook(sym, hook, orig);
     }
@@ -41,13 +53,7 @@ struct AutoHook {
 
     // workaround for a warning
     template<typename T>
-    AutoHook(const char *sym, T hook, void **orig) {
-        union {
-            T a;
-            void *b;
-        } hookUnion;
-        hookUnion.a = hook;
-        AutoHook(sym, hookUnion.b, orig);
+    AutoHook(const char *sym, T hook, void **orig) : AutoHook(sym, castToVoid(hook), orig) {
     }
 
 };
