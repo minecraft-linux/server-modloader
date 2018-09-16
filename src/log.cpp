@@ -5,6 +5,8 @@
 
 using namespace modloader;
 
+extern "C" {
+
 const char *modloader_log_level_str(modloader_log_level level) {
     if (level == MODLOADER_LOG_TRACE) return "Trace";
     if (level == MODLOADER_LOG_DEBUG) return "Debug";
@@ -33,6 +35,8 @@ void modloader_log(modloader_log_level level, const char *tag, const char *forma
     va_start(args, format);
     modloader_vlog(level, tag, format, args);
     va_end(args);
+}
+
 }
 
 void Log::log(LogLevel level, const char* tag, const char* format, ...) {
