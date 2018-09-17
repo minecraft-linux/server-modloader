@@ -19,5 +19,7 @@ jobs:
         command: cd sdk && zip -r ../sdk.zip . && cd ..
     - store_artifacts:
         path: sdk.zip
+        destination: mod_sdk.zip
     - store_artifacts:
         path: sdk/lib/libserver_modloader.so
+        destination: libserver_modloader.so
