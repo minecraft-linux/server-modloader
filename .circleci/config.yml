@@ -35,7 +35,7 @@ jobs:
         name: Publish GitHub release
         command: |
           ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} \
-          -delete "Continous Build" ./artifacts/
+          -delete ${CIRCLE_TAG} ./artifacts/
 
 workflows:
   version: 2
@@ -45,3 +45,7 @@ workflows:
     - publish-github-release:
         requires:
           - build
+        branches:
+          only: [master]
+        tags:
+          only: /.*/
