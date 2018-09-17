@@ -45,7 +45,8 @@ workflows:
     - publish-github-release:
         requires:
           - build
-        branches:
-          only: [master]
-        tags:
-          only: /.*/
+        filters:
+          branches:
+            only: [master]
+          tags:
+            only: /.*/
