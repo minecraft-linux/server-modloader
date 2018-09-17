@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-    - image: buildpack-deps:trusty
+    - image: buildpack-deps:xenial
     steps:
     - checkout
     - run:
