@@ -34,6 +34,7 @@ jobs:
         command: |
           ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} \
           -delete "Continous Build" ./artifacts/
+
 workflows:
   version: 2
   main:
@@ -42,7 +43,3 @@ workflows:
     - publish-github-release:
         requires:
           - build
-        filters:
-          branches:
-            only:
-              -master
