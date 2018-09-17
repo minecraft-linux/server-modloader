@@ -21,7 +21,7 @@ jobs:
           zip -r ../artifacts/mod_sdk.zip . && cp lib/libserver_modloader.so ../artifacts && cd ..
     - persist_to_workspace:
         root: artifacts/
-        paths: ".*"
+        paths: "*"
     - store_artifacts:
         path: artifacts/
         destination: /
