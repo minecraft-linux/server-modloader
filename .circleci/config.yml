@@ -16,7 +16,7 @@ jobs:
         command: mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=../sdk/ .. && make && make install && cd ..
     - run:
         name: Zip the SDK
-        command: ls && zip -r sdk.zip sdk/
+        command: cd sdk && zip -r ../sdk.zip . && cd ..
     - store_artifacts:
         path: sdk.zip
     - store_artifacts:
