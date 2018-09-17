@@ -23,3 +23,14 @@ jobs:
     - store_artifacts:
         path: sdk/lib/libserver_modloader.so
         destination: libserver_modloader.so
+  publish-github-release:
+    docker:
+    - image: cibuilds/github:0.10
+    steps:
+    - attach_workspace:
+        at: ./artifacts
+    - run:
+        name: Publish GitHub release
+        command: |
+          ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} \
+          -delete "Continous Build" ./artifacts/
