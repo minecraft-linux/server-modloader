@@ -15,14 +15,16 @@ jobs:
         name: Build
         command: mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=../sdk/ .. && make && make install && cd ..
     - run:
-        name: Zip the SDK
-        command: cd sdk && zip -r ../sdk.zip . && cd ..
+        name: Pack the SDK and modloader
+        command: |
+          mkdir artifacts && cd sdk &&
+          zip -r ../artifacts/mod_sdk.zip . && cp lib/libserver_modloader.so ../artifacts && cd ..
+    - persist_to_workspace:
+        root: artifacts/
+        paths: ".*"
     - store_artifacts:
-        path: sdk.zip
-        destination: mod_sdk.zip
-    - store_artifacts:
-        path: sdk/lib/libserver_modloader.so
-        destination: libserver_modloader.so
+        path: artifacts/
+        destination: /
   publish-github-release:
     docker:
     - image: cibuilds/github:0.10
