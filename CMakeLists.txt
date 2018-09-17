@@ -1,9 +1,14 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 2.8)
 project(server_modloader)
 
 include(CMakePackageConfigHelpers)
 
-set(CMAKE_CXX_STANDARD 11)
+if (CMAKE_VERSION VERSION_LESS 3.0.0)
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+else()
+    set(CMAKE_CXX_STANDARD 11)
+endif()
+
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set(MODLOADER_VERSION "Preview 1")
