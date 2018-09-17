@@ -41,10 +41,13 @@ workflows:
   version: 2
   main:
     jobs:
-    - build
+    - build:
+        filters:
+          tags:
+            only: /.*/
     - publish-github-release:
         requires:
-          - build
+        - build
         filters:
           branches:
             ignore: /.*/
