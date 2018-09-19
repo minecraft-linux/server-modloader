@@ -1,6 +1,7 @@
 #ifndef MODLOADER_STAICHOOK_H
 #define MODLOADER_STAICHOOK_H
 
+#include <utility>
 #include "hook.h"
 
 #define _TInstanceHook(class_inh, pclass, iname, sym, ret, args...) \
