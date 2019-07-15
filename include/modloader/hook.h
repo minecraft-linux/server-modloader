@@ -9,6 +9,8 @@ extern "C" {
 
 typedef void modloader_hook_t;
 
+void* modloader_dlsym_print_error(const char *sym);
+
 modloader_hook_t* modloader_hook(void *sym, void *hook, void **orig);
 
 void modloader_destroy_hook(modloader_hook_t*);
@@ -48,7 +50,7 @@ public:
     }
 
 
-    AutoHook(const char *sym, void *hook, void **orig) : AutoHook(dlsym(RTLD_DEFAULT, sym), hook, orig) {
+    AutoHook(const char *sym, void *hook, void **orig) : AutoHook(modloader_dlsym_print_error(sym), hook, orig) {
     }
 
     // workaround for a warning

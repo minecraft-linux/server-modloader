@@ -9,6 +9,13 @@ using namespace modloader;
 
 extern "C" {
 
+void *modloader_dlsym_print_error(const char *sym) {
+    void *ptr = dlsym(RTLD_DEFAULT, sym);
+    if (!ptr)
+        Log::error("Hook", "Unknown symbol %s", sym);
+    return ptr;
+}
+
 modloader_hook_t *modloader_hook(void *sym, void *hook, void **orig) {
     funchook_t *h = funchook_create();
     if (!h)
