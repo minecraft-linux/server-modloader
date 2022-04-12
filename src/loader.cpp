@@ -90,6 +90,10 @@ void *ModLoaderImpl::loadLib(std::string const &path) {
     }
 
     void* ret = dlopen(fullPath.c_str(), RTLD_LAZY);
+    if (!ret) {
+        Log::error("ModLoader", "Failed loading library %s: %s", fullPath.c_str(), dlerror());
+        return nullptr;
+    }
     std::string filename = iof != std::string::npos ? path.substr(iof + 1) : path;
     knownLoadedLibs[filename] = ret;
     return ret;
