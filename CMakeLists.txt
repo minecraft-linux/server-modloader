@@ -11,7 +11,7 @@ endif()
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-set(MODLOADER_VERSION "Preview 2")
+set(MODLOADER_VERSION "Preview 3")
 
 add_subdirectory(dep/funchook)
 
