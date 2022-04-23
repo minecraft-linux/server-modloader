@@ -89,7 +89,7 @@ void *ModLoaderImpl::loadLib(std::string const &path) {
         fullPath = path;
     }
 
-    void* ret = dlopen(fullPath.c_str(), RTLD_LAZY);
+    void* ret = dlopen(fullPath.c_str(), RTLD_NOW);
     if (!ret) {
         Log::error("ModLoader", "Failed loading library %s: %s", fullPath.c_str(), dlerror());
         return nullptr;
