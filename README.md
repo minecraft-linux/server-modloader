@@ -16,6 +16,9 @@ This is a tool to load mods onto the Linux version of [Bedrock Dedicated Server]
 
 You now have a `libserver_modloader.so` binary.
 
+## Examples, usage info
+Check out the [wiki](https://github.com/minecraft-linux/server-modloader/wiki) for examples and more information.
+
 ## Getting mods to work on newer versions (1.16+)
 Newer versions of BDS don't have exported symbols anymore, so a little hacking is necessary to modify the binary and make the symbols linkable.
 
