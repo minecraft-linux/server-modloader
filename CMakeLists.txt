@@ -11,6 +11,11 @@ endif()
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+#BDS is linked to libc++ since 1.20.40
+set(CMAKE_CXX_COMPILER "clang++")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++")
+
 set(MODLOADER_VERSION "Preview 3")
 
 add_subdirectory(dep/funchook)
