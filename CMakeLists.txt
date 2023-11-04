@@ -19,7 +19,7 @@ endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++")
 
-set(MODLOADER_VERSION "Preview 3")
+set(MODLOADER_VERSION "v0.0.1-alpha4")
 
 add_subdirectory(dep/funchook)
 
