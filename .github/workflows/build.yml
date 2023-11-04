@@ -9,7 +9,7 @@ jobs:
         with:
           submodules: recursive
       - name: Install deps
-        run: sudo apt-get install -y git cmake zip
+        run: sudo apt-get install -y git cmake zip libc++-dev
       - name: Build
         run: mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=../sdk/ .. && make && make install && cd ..
       - name: Pack the SDK and modloader
