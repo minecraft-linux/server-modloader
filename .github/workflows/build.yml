@@ -10,6 +10,14 @@ jobs:
           submodules: recursive
       - name: Install deps
         run: sudo apt-get install -y git cmake zip libc++1-12 libc++abi-12-dev libc++-12-dev libc++abi1-12
+      - name: Retrieve version
+        run: |
+          echo "TAG_NAME=$(cat CMakeLists.txt | grep -Po '(?<=MODLOADER_VERSION \")[^\"]+')" >> $GITHUB_OUTPUT
+        id: version
+      - name: Print version
+        env:
+          VERSION: ${{ steps.version.outputs.TAG_NAME }}
+        run: echo "$VERSION"
       - name: Build
         run: mkdir build && cd build && cmake -DCMAKE_CXX_COMPILER=clang++-12 -DCMAKE_INSTALL_PREFIX=../sdk/ .. && make && make install && cd ..
       - name: Pack the SDK and modloader
@@ -31,7 +39,7 @@ jobs:
         if: startsWith(github.event.head_commit.message, '[Release]')
         with:
           draft: true
-          tag_name: test-rel
+          tag_name: ${{ steps.version.outputs.TAG_NAME }}
           files: |
             artifacts/libserver_modloader.so
             artifacts/mod_sdk.zip
