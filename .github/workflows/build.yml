@@ -26,3 +26,12 @@ jobs:
         with:
           name: mod_sdk.zip
           path: artifacts/mod_sdk.zip
+      - name: Update release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.event.head_commit.message, '[Release]')
+        with:
+          draft: true
+          tag_name: test-rel
+          files: |
+            artifacts/libserver_modloader.so
+            artifacts/mod_sdk.zip
