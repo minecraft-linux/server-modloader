@@ -12,7 +12,10 @@ endif()
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 #BDS is linked to libc++ since 1.20.40
-set(CMAKE_CXX_COMPILER "clang++")
+if(NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  message(NOTICE "Setting compiler to clang++")
+  set(CMAKE_CXX_COMPILER "clang++")
+endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++")
 
