@@ -16,8 +16,13 @@ jobs:
         run: |
           mkdir artifacts && cd sdk &&
           zip -r ../artifacts/mod_sdk.zip . && cp lib/libserver_modloader.so ../artifacts && cd ..
-      - name: Archive artifacts
+      - name: Artifact - libserver_modloader.so
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts
-          path: artifacts
+          name: libserver_modloader.so
+          path: artifacts/libserver_modloader.so
+      - name: Artifact - mod_sdk.zip
+        uses: actions/upload-artifact@v3
+        with:
+          name: mod_sdk.zip
+          path: artifacts/mod_sdk.zip
