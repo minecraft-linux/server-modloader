@@ -1,0 +1,23 @@
+name: Build
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install deps
+        run: apt-get update && apt-get install -y git cmake zip
+      - name: Build
+        run: mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=../sdk/ .. && make && make install && cd ..
+      - name: Pack the SDK and modloader
+        run: |
+          mkdir artifacts && cd sdk &&
+          zip -r ../artifacts/mod_sdk.zip . && cp lib/libserver_modloader.so ../artifacts && cd ..
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          path: artifacts
