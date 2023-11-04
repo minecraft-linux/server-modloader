@@ -9,7 +9,7 @@ jobs:
         with:
           submodules: recursive
       - name: Install deps
-        run: sudo apt-get install -y git cmake zip libc++-dev
+        run: sudo apt-get install -y git cmake zip libc++-12-dev
       - name: Print clang version
         run: clang++ -v
       - name: Build
