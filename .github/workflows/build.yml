@@ -15,7 +15,7 @@ jobs:
           echo "TAG_NAME=$(cat CMakeLists.txt | grep -Po '(?<=MODLOADER_VERSION \")[^\"]+')" >> $GITHUB_OUTPUT
         id: version
       - name: Build
-        run: mkdir build && cd build && cmake -DCMAKE_CXX_COMPILER=clang++-12 -DCMAKE_INSTALL_PREFIX=../sdk/ .. && make && make install && cd ..
+        run: mkdir build && cd build && cmake -DCMAKE_C_COMPILER=clang-12 -DCMAKE_CXX_COMPILER=clang++-12 -DCMAKE_INSTALL_PREFIX=../sdk/ .. && make && make install && cd ..
       - name: Pack the SDK and modloader
         run: |
           mkdir artifacts && cd sdk &&
