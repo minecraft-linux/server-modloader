@@ -13,7 +13,7 @@ jobs:
       - name: Print clang version
         run: clang++ -v
       - name: Build
-        run: mkdir build && cd build && cmake -DCMAKE_CXX_COMPILER=clang++12 -DCMAKE_INSTALL_PREFIX=../sdk/ .. && make && make install && cd ..
+        run: mkdir build && cd build && cmake -DCMAKE_CXX_COMPILER=clang++-12 -DCMAKE_INSTALL_PREFIX=../sdk/ .. && make && make install && cd ..
       - name: Pack the SDK and modloader
         run: |
           mkdir artifacts && cd sdk &&
