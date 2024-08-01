@@ -113,14 +113,21 @@ void ModLoaderImpl::loadModsFromDirectory(std::string const &path) {
         Log::info("ModLoader", "Directory does not exist");
         return;
     }
+    int errors = 0;
     while ((ent = readdir(dir)) != nullptr) {
         if (ent->d_name[0] == '.')
             continue;
         std::string fileName(ent->d_name);
         size_t len = fileName.length();
 
-        loadMod(fileName);
+        if(loadMod(fileName) == nullptr){
+            errors++;
+        }
     }
     closedir(dir);
-    Log::info("ModLoader", "Loaded %li mods", mods.size());
+    Log::info("ModLoader", "Loaded %li mods", mods.size() - errors);
+    if(errors > 0){
+        Log::error("ModLoader", "%d mods failed to load, aborting", errors);
+        exit(1);
+    }
 }
